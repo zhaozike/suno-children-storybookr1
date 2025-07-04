@@ -1,34 +1,142 @@
-/* App specific styles */
+@import "tailwindcss";
+@import "tw-animate-css"; /* 确保这个库已正确安装并导入 */
 
-/* 自定义动画 */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
+/* 基本样式和主题变量 */
+:root {
+  --background: oklch(100% 0 0); /* White */
+  --foreground: oklch(0% 0 0);   /* Black */
+
+  /* 自定义颜色变量，与App.jsx中的渐变色和图标色调匹配 */
+  --purple-50: #f5f3ff;
+  --purple-100: #ede9fe;
+  --purple-200: #ddd6fe;
+  --purple-400: #a78bfa;
+  --purple-600: #7c3aed;
+  --purple-700: #6d28d9;
+  --purple-800: #5b21b6;
+
+  --pink-50: #fdf2f8;
+  --pink-100: #fce7f3;
+  --pink-200: #fbcfe8;
+  --pink-400: #f472b6;
+  --pink-600: #db2777;
+  --pink-700: #be185d;
+
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-400: #60a5fa;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+
+  --green-50: #f0fdf4;
+  --green-100: #dcfce7;
+  --green-200: #bbf7d0;
+  --green-600: #16a34a;
+
+  --yellow-400: #facc15; /* For star ratings */
+
+  /* Tailwind CSS 默认变量的映射，确保它们在App.jsx中能被识别 */
+  --radius: 0.5rem; /* 默认圆角 */
+
+  --primary: var(--purple-600);
+  --primary-foreground: white;
+  --secondary: var(--pink-600);
+  --secondary-foreground: white;
+  --accent: var(--blue-600);
+  --accent-foreground: white;
+  --destructive: var(--pink-600); /* Example destructive color */
+  --destructive-foreground: white;
+  --muted: var(--gray-100);
+  --muted-foreground: var(--gray-600);
+  --card: white;
+  --card-foreground: var(--gray-900);
+  --popover: white;
+  --popover-foreground: var(--gray-900);
+  --border: var(--gray-200);
+  --input: var(--gray-300);
+  --ring: var(--purple-400); /* Focus ring color */
+}
+
+/* 暗色模式（如果您的项目支持） */
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.922 0 0);
+  --destructive-foreground: oklch(0.205 0 0);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+/* Tailwind CSS 应用到 body */
+@layer base {
+  body {
+    @apply font-sans text-gray-800; /* 默认字体和颜色 */
   }
 }
 
-@keyframes gradient-shift {
+/* 自定义动画：浮动动画 */
+@keyframes float {
   0% {
-    background-position: 0% 50%;
+    transform: translateY(0px);
   }
   50% {
-    background-position: 100% 50%;
+    transform: translateY(-10px); /* 向上浮动 */
   }
   100% {
-    background-position: 0% 50%;
+    transform: translateY(0px);
   }
 }
 
 .float-animation {
-  animation: float 6s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite; /* 应用浮动动画 */
 }
 
-.gradient-animation {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
+/* 自定义动画：淡入动画 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+/* 可以根据需要添加更多自定义动画 */
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-zoom-in {
+  animation: zoom-in 0.5s ease-out forwards;
+}
